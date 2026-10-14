@@ -48,6 +48,22 @@ input,select,textarea,button{max-width:100%;}
   .numbers strong{font-size:14px;}
   .actions .btn{flex-basis:100%;}
 }
+
+/* Cross-device form hardening: prevent native date controls and grid items from overlapping */
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;column-gap:12px;row-gap:0}
+.grid>.field{width:100%;min-width:0;max-width:100%;}
+.field input,.field select,.field textarea{display:block;box-sizing:border-box;width:100%;max-width:100%;min-width:0;margin:0;}
+.field input[type="date"]{-webkit-appearance:none;appearance:none;display:block;width:100%;min-width:0;max-width:100%;min-height:46px;padding:10px 8px;font-family:inherit;font-size:16px;}
+.field input[type="text"],.field input[type="number"],.field input[list]{overflow:hidden;text-overflow:ellipsis;}
+@media screen and (max-width:640px){
+  .wrap{width:100%;max-width:100%;padding-left:12px;padding-right:12px;}
+  .grid{grid-template-columns:minmax(0,1fr)!important;column-gap:0;row-gap:0;width:100%;}
+  .grid>.field,.grid>.field.full{grid-column:1 / -1;width:100%;min-width:0;max-width:100%;}
+  .field{min-width:0;width:100%;}
+  .field label{display:block;line-height:1.4;overflow-wrap:anywhere;}
+  .field input,.field select,.field textarea{width:100%!important;min-width:0!important;max-width:100%!important;font-size:16px;}
+  .field input[type="date"]{width:100%!important;min-width:0!important;max-width:100%!important;padding-left:8px;padding-right:4px;}
+}
 </style></head>
 <body><main class="wrap">
 <header class="top"><div class="eyebrow">Personal ledger</div><h1>Card Ledger</h1><p>Track friend transactions, collections and your net profit.</p></header>
